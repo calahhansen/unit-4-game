@@ -5,13 +5,34 @@ const randomNumber = 50;
 
 // Here we created code that selects a number either 10 or 11.
     // We'll set this number at the start of the "game".
-    const numberOptions = [10, 11];
+    const numberOptions = [10, 5, 3, 7];
     const increment = numberOptions[Math.round(Math.random())];
+
+    // Next we create a for loop to create crystals for every numberOption.
+    for (let i = 0; i < numberOptions.length; i++) {
+
+        // For each iteration, we will create an imageCrystal
+        const imageCrystal = document.createElement("img");
+  
+        // First each crystal will be given the class ".crystal-image".
+        // This will allow the CSS to take effect.
+        imageCrystal.classList.add("item5");
+  
+        // Each imageCrystal will be given a src link to the crystal image
+        imageCrystal.setAttribute("src", "../images/crystal1.png");
+  
+        // Each imageCrystal will be given a data attribute called data-crystalValue.
+        // This data attribute will be set equal to the array value.
+        imageCrystal.setAttribute("data-crystalvalue", numberOptions[i]);
+  
+        // Lastly, each crystal image (with all it classes and attributes) will get added to the page.
+        document.getElementById("crystals").append(imageCrystal);
+      }
 
 document.getElementById("random-number").innerHTML = randomNumber;
 
 // on-click event that responds to button clicks of the crystal images associated with class item5.
-document.querySelectorAll(".item5").forEach(function(node){
+document.querySelectorAll(".crystals").forEach(function(node){
     node.addEventListener("click", function() {
     // Each time the user clicks the crystal the counter goes up by 1 and triggers an alert message.
         scoreCounter += increment;
