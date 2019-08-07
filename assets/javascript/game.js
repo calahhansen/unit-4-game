@@ -1,5 +1,7 @@
 
 // define variables
+let winCounter = 0;
+let lossCounter = 0;
 let scoreCounter = 0;
 //issue with random number 1-9
 let randomNumber = Math.floor(Math.random() * 100);
@@ -7,28 +9,28 @@ console.log(randomNumber);
 document.getElementById("random-number").innerHTML = randomNumber;
 
 // define numberOptions array and increment random/round
-let numberOptions = [10, 5, 3, 7];
-let increment = numberOptions[Math.round(Math.random())];
-console.log(numberOptions, increment);
+const numberOptions = [10, 5, 3, 7];
+//let increment = numberOptions[Math.round(Math.random())];
+//console.log(numberOptions, increment);
 
 // Next we create a for loop to create crystals for every numberOption.
 for (let i = 0; i < numberOptions.length; i++) {
 
-// For each iteration, we will create an imageCrystal
+  // For each iteration, we will create an imageCrystal
   const imageCrystal = document.createElement("img");
-
-// First each crystal will be given the class ".crystal-image".
-// This will allow the CSS to take effect.
+  console.log(imageCrystal);
+  // First each crystal will be given the class ".crystal-image".
+  // This will allow the CSS to take effect.
   imageCrystal.classList.add("crystal-image");
 
-// Each imageCrystal will be given a src link to the crystal image
-  imageCrystal.setAttribute("src", "../gameimages/");
+  // Each imageCrystal will be given a src link to the crystal image
+  imageCrystal.setAttribute("src", "https://images.unsplash.com/photo-1550007436-ba84ff7bcb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");
 
-// Each imageCrystal will be given a data attribute called data-crystalValue.
-// This data attribute will be set equal to the array value.
+  // Each imageCrystal will be given a data attribute called data-crystalValue.
+  // This data attribute will be set equal to the array value.
   imageCrystal.setAttribute("data-crystalvalue", numberOptions[i]);
 
-// Lastly, each crystal image (with all it classes and attributes) will get added to the page.
+  // Lastly, each crystal image (with all it classes and attributes) will get added to the page.
   document.getElementById("crystals").append(imageCrystal);
 }
 
@@ -36,16 +38,19 @@ for (let i = 0; i < numberOptions.length; i++) {
 
 
 // on-click event that responds to button clicks of the crystal images associated with class item5.
-document.querySelectorAll(".crystals").forEach(function () {
+document.querySelectorAll(".crystal-image").forEach(function (node) {
   node.addEventListener("click", function () {
     // Each time the user clicks the crystal the counter goes up by 1 and triggers an alert message.
-    scoreCounter += increment;
+    const crystalValue = node.getAttribute("data-crystalvalue");
+    crystalValue = parseInt(crystalValue);
+
+    scoreCounter += crystalValue;
     console.log(scoreCounter);
     // Here we created some logic to "check" if the click counter matches the targetNumber.
     // Remember, this click event will be triggered with each click.
     // With each click the counter will increase by 10 and be re-evaluated against target.
     if (scoreCounter === randomNumber) {
-
+      winCounter
       // If the numbers match we'll celebrate the user's win.
       alert("You win!");
     }
