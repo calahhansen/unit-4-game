@@ -3,6 +3,11 @@
 let winCounter = 0;
 let lossCounter = 0;
 let scoreCounter = 0;
+
+let winsText = document.getElementById("win-counter");
+let lossesText = document.getElementById("loss-counter");
+console.log(winsText, lossesText);
+
 //issue with random number 1-9
 let randomNumber = Math.floor(Math.random() * 100);
 console.log(randomNumber);
@@ -13,9 +18,12 @@ const numberOptions = [10, 5, 3, 7];
 //let increment = numberOptions[Math.round(Math.random())];
 //console.log(numberOptions, increment);
 
+const gameImages = "../gameimages/index.js";
+
 // Next we create a for loop to create crystals for every numberOption.
 for (let i = 0; i < numberOptions.length; i++) {
 
+    // for ( let j = 0; j < gameImages.length; j++) {
   // For each iteration, we will create an imageCrystal
   const imageCrystal = document.createElement("img");
   console.log(imageCrystal);
@@ -24,14 +32,14 @@ for (let i = 0; i < numberOptions.length; i++) {
   imageCrystal.classList.add("crystal-image");
 
   // Each imageCrystal will be given a src link to the crystal image
-  imageCrystal.setAttribute("src", "https://images.unsplash.com/photo-1550007436-ba84ff7bcb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");
-
+  imageCrystal.setAttribute("src", gameImages);
   // Each imageCrystal will be given a data attribute called data-crystalValue.
   // This data attribute will be set equal to the array value.
   imageCrystal.setAttribute("data-crystalvalue", numberOptions[i]);
 
   // Lastly, each crystal image (with all it classes and attributes) will get added to the page.
   document.getElementById("crystals").append(imageCrystal);
+    
 }
 
 
@@ -50,15 +58,18 @@ document.querySelectorAll(".crystal-image").forEach(function (node) {
     // Remember, this click event will be triggered with each click.
     // With each click the counter will increase by 10 and be re-evaluated against target.
     if (scoreCounter === randomNumber) {
-      winCounter
+      winCounter++;
+      winsText.textContent = "Wins: " + wincounter;
+      
       // If the numbers match we'll celebrate the user's win.
-      alert("You win!");
+      //alert("You win!");
     }
     // Here we added an "else if" condition. If the user's counter ever exceeds the targetNumber...
-    else if (scoreCounter >= randomNumber) {
-
+    else if (scoreCounter > randomNumber) {
+      lossCounter++;
+      lossesText.textContent = "Losses: " + lossCounter;
       // Then they are alerted with a loss.
-      alert("You lose!!");
+     //alert("You lose!!");
     }
 
     // This is fine except the way our code is written every user will win first (when they hit 50).
